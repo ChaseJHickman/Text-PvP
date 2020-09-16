@@ -71,11 +71,11 @@ namespace HelloWorld
             //Equip item based on input value
             if (input == '1')
             {
-                player.EquipItem(longSword);
+                player.AddItemToInventory(longSword, 0);
             }
             else if (input == '2')
             {
-                player.EquipItem(dagger);
+                player.AddItemToInventory(dagger, 0);
             }
             _player1.PrintStats();
 
@@ -84,11 +84,11 @@ namespace HelloWorld
             //Equip item based on input value
             if (input == '1')
             {
-                player.EquipItem(longSword);
+                player.AddItemToInventory(longSword, 0);
             }
             else if (input == '2')
             {
-                player.EquipItem(dagger);
+                player.AddItemToInventory(dagger, 0);
             }
             Console.WriteLine("Player 2");
             _player2.PrintStats();
@@ -98,7 +98,7 @@ namespace HelloWorld
         {
             Console.Write("What is your name?");
             string name = Console.ReadLine();
-            Player player = new Player(name, 100, 10);
+            Player player = new Player(name, 100, 10,5);
             SelectItems(player);
             return player;
         }
