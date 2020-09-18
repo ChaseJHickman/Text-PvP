@@ -26,6 +26,11 @@ namespace HelloWorld
             _inventory = new Item[inventorySize];
         }
 
+        public void AddItemToInventory(Item item, int index)
+        {
+            _inventory[index] = item;
+        }
+
         public void EquipItem(int itemIndex)
         {
             _damage = _inventory[itemIndex].statBoost;
