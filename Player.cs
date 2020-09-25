@@ -4,29 +4,21 @@ using System.Text;
 
 namespace HelloWorld
 {
-    class Player
+    class Player : Character
     {
-        private string _name;
-        private int _health;
-        private int _baseDamage;
         private Item[] _inventory;
         private Item _currentWeapon;
         private Item _hands;
 
-        public Player()
+        public Player() : base()
         {
-            _inventory = new Item[3];
-            _health = 100;
-            _baseDamage = 10;
             _hands.name = "These hands";
             _hands.statBoost = 0;
         }
 
-        public Player(string nameVal, int healthVal, int damageVal, int inventorySize)
+        public Player(string nameVal, float healthVal, float damageVal, int inventorySize)
+            : base(healthVal, nameVal, damageVal)
         {
-            _name = nameVal;
-            _health = healthVal;
-            _baseDamage = damageVal;
             _inventory = new Item[inventorySize];
             _hands.name = "These Hands";
             _hands.statBoost = 0;
@@ -54,21 +46,11 @@ namespace HelloWorld
 
         public void EquipItem(int itemIndex)
         {
-            if(Contains(itemIndex) == true)
+            if (Contains(itemIndex) == true)
             {
                 _currentWeapon = _inventory[itemIndex];
             }
 
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
-        
-        public bool GetIsAlive()
-        {
-            return _health > 0;
         }
 
         public void unequipItem()
@@ -76,26 +58,11 @@ namespace HelloWorld
             _currentWeapon = _hands;
         }
 
-        public void Attack(Player enemy)
+        public override float Attack(Character enemy)
         {
-            int totalDamage = _baseDamage + _currentWeapon.statBoost;
-            enemy.TakeDamage(_baseDamage);
-        }
-
-        public void PrintStats()
-        {
-            Console.WriteLine("Name: " + _name);
-            Console.WriteLine("Health: " + _health);
-            Console.WriteLine("Damage: " + _baseDamage);
-        }
-
-        private void TakeDamage(int damageVal)
-        {
-            if(GetIsAlive())
-            {
-                _health -= damageVal;
-            }
-            Console.WriteLine(_name + " took " + damageVal + " damage!");
+            float damageTaken = 0.0f;
+            damageTaken = base.Attack(enemy);
+            return damageTaken;
         }
     }
 }
